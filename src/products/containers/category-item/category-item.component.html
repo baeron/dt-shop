@@ -1,3 +1,4 @@
-<p>
-  category-item works!
-</p>
+<div class="category-item">
+  <div *ngIf="!category"><h5>Routing works but service not realize</h5></div>
+  <div class="category-item__name" *ngIf="category">{{ category.name }}</div>
+</div>

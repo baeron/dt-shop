@@ -1,41 +1,52 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { ProductItemComponentComponent } from "./product-containers/product-item-component/product-item-component.component";
+import { ProductComponentComponent } from "./product-containers/product-component/product-component.component";
+import { NgModule } from "@angular/core";
+import { Routes, RouterModule } from "@angular/router";
+import { CommonModule } from "@angular/common";
 
-//
-import { CategoryItemComponent } from './containers/category-item/category-item.component';
-import { CategorysComponent } from './containers/categorys/categorys.component';
+// components
+import * as fromComponents from "./components";
 
 // containers
-import * as fromContainers from './containers';
+import * as fromContainers from "./containers";
 
 // services
-import * as fromServices from './services';
+import * as fromServices from "./services";
 
 export const ROUTES: Routes = [
   {
-    path: '',
-    component: fromContainers.CategorysComponent,
+    path: "",
+    component: fromContainers.CategorysComponent
   },
   {
-    path: ':id',
-    component: fromContainers.CategoryItemComponent,
-  },
-/*
+    path: ":categoryId",
+    component: fromContainers.CategoryItemComponent
+  }
+  /*
   {
-    path: 'new',
-    component: fromContainers.CategoryItemComponent,
+    path: ":categoryId/products",
+    component: fromProductContainers.ProductComponentComponent
   },
-*/
+  {
+    path: ":/categoryId/products/:id",
+    component: fromProductContainers.ProductItemComponentComponent
+  }
+  */
 ];
 
-
 @NgModule({
-  imports: [RouterModule.forChild(ROUTES)],
+  imports: [CommonModule, RouterModule.forChild(ROUTES)],
   providers: [...fromServices.services],
   declarations: [
-    CategoryItemComponent,
-    CategorysComponent,
-    ...fromContainers.containers],
-  exports: [...fromContainers.containers, RouterModule]
+    ...fromContainers.containers,
+    ...fromComponents.components,
+    ProductComponentComponent,
+    ProductItemComponentComponent
+  ],
+  exports: [
+    ...fromContainers.containers,
+    ...fromComponents.components,
+    RouterModule
+  ]
 })
-export class ProductsRoutingModule { }
+export class ProductsRoutingModule {}
