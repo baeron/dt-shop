@@ -1,8 +1,11 @@
 <div class="categories">
   <div class="categories__container">
     <div class="categories__list">
-      <div *ngIf="categoryList">
-        <div *ngFor="let categoryItem of categoryList">
+      <div *ngIf="!(categories$ | async)">
+        <span>NEED search error</span>
+      </div>
+      <div *ngIf="(categories$ | async)">
+        <div *ngFor="let categoryItem of (categories$ | async)">
           <app-item-category [category]="categoryItem"> </app-item-category>
         </div>
       </div>
