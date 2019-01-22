@@ -1,42 +1,46 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { NgModule } from "@angular/core";
+import { Routes, RouterModule } from "@angular/router";
 
-import { StoreRouterConnectingModule, RouterStateSerializer } from '@ngrx/router-store';
-import { StoreModule, MetaReducer } from '@ngrx/store';
-import { EffectsModule } from '@ngrx/effects';
+import {
+  StoreRouterConnectingModule,
+  RouterStateSerializer
+} from "@ngrx/router-store";
+import { StoreModule, MetaReducer } from "@ngrx/store";
+import { EffectsModule } from "@ngrx/effects";
 
 // not used in production
-import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { storeFreeze } from 'ngrx-store-freeze';
+import { StoreDevtoolsModule } from "@ngrx/store-devtools";
+import { storeFreeze } from "ngrx-store-freeze";
+
+import { reducers } from "./store";
 
 // this would be done dynamically with webpack for builds
 const environment = {
   development: true,
-  production: false,
+  production: false
 };
 
 export const metaReducers: MetaReducer<any>[] = !environment.production
   ? [storeFreeze]
   : [];
 
-
 // routes
 export const ROUTES: Routes = [
-  { path: '', pathMatch: 'full', redirectTo: 'products' },
+  { path: "", pathMatch: "full", redirectTo: "products" },
   {
-    path: 'products',
-    loadChildren: '../products/products.module#ProductsModule',
-  },
+    path: "products",
+    loadChildren: "../products/products.module#ProductsModule"
+  }
 ];
 
 @NgModule({
   imports: [
     RouterModule.forRoot(ROUTES),
-      StoreModule.forRoot({}, { metaReducers }),
-      EffectsModule.forRoot([]),
-      StoreRouterConnectingModule,
-      environment.development ? StoreDevtoolsModule.instrument() : [],
+    StoreModule.forRoot(reducers, { metaReducers }),
+    EffectsModule.forRoot([]),
+    StoreRouterConnectingModule,
+    environment.development ? StoreDevtoolsModule.instrument() : []
   ],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

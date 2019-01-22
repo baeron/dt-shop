@@ -23,10 +23,17 @@ export const getCategoryState = createSelector(
   (state: ProductsState) => state.categories
 );
 
-export const getAllCategories = createSelector(
+export const getCategoriesEntities = createSelector(
   getCategoryState,
-  fromCategories.getCategories
+  fromCategories.getCategoriesEntities
 );
+export const getAllCategories = createSelector(
+  getCategoriesEntities,
+  entities => {
+    return Object.keys(entities).map(id => entities[parseInt(id, 10)]);
+  }
+);
+
 export const getCategoriesLoaded = createSelector(
   getCategoryState,
   fromCategories.getCategoriesLoaded

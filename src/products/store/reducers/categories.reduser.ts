@@ -1,14 +1,15 @@
+import { CategoryState } from "./categories.reduser";
 import { Category } from "./../../models/catregory.model";
 import * as fromCategory from "../actions/categories.actions";
 
 export interface CategoryState {
-  data: Category[];
+  entities: { [id: number]: Category };
   loaded: boolean;
   loading: boolean;
 }
 
 export const initialState: CategoryState = {
-  data: [],
+  entities: {},
   loaded: false,
   loading: false
 };
@@ -26,13 +27,20 @@ export function reducer(
     }
 
     case fromCategory.LOAD_CATEGORIES_SUCCESS: {
-      const data = action.payload;
-      return {
-        ...state,
-        loading: false,
-        loaded: true,
-        data
-      };
+      const categories = action.payload;
+      const entities = categories.reduce(
+        // tslint:disable-next-line:no-shadowed-variable
+        (entities: { [id: number]: Category }, category: Category) => {
+          return {
+            ...entities,
+            [category.id]: category
+          };
+        },
+        {
+          ...state.entities
+        }
+      );
+      return { ...state, loading: false, loaded: true, entities };
     }
 
     case fromCategory.LOAD_CATEGORIES_FAIL: {
@@ -49,4 +57,4 @@ export function reducer(
 
 export const getCategoriesLoading = (state: CategoryState) => state.loading;
 export const getCategoriesLoaded = (state: CategoryState) => state.loaded;
-export const getCategories = (state: CategoryState) => state.data;
+export const getCategoriesEntities = (state: CategoryState) => state.entities;
