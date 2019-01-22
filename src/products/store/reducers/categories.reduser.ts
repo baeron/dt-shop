@@ -1,5 +1,5 @@
-import { Category } from './../../models/catregory.model';
-import * as fromCategory from '../actions/categories.actions';
+import { Category } from "./../../models/catregory.model";
+import * as fromCategory from "../actions/categories.actions";
 
 export interface CategoryState {
   data: Category[];
@@ -8,21 +8,7 @@ export interface CategoryState {
 }
 
 export const initialState: CategoryState = {
-  data: [
-    {
-      "name": "First",
-      "products": [
-        {
-          "id": 10,
-          "name": "First product"
-        },
-        {
-          "id": 11,
-          "name": "Second product"
-        }
-      ]
-    }
-  ],
+  data: [],
   loaded: false,
   loading: false
 };
@@ -40,10 +26,12 @@ export function reducer(
     }
 
     case fromCategory.LOAD_CATEGORIES_SUCCESS: {
+      const data = action.payload;
       return {
         ...state,
         loading: false,
-        loaded: true
+        loaded: true,
+        data
       };
     }
 

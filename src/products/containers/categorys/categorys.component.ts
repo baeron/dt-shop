@@ -3,12 +3,11 @@ import { Category } from "./../../models/catregory.model";
 import { Component, OnInit } from "@angular/core";
 
 // производим замену нашего сервиса на STORE и Observable
-import { Store } from '@ngrx/store';
+import { Store } from "@ngrx/store";
 // import { Observable } from 'rxjs/Observable';
 // выгребаем весь объект STORE ранее созданный нами
-import * as fromStore from '../../store';
-import { Observable } from 'rxjs';
-
+import * as fromStore from "../../store";
+import { Observable } from "rxjs";
 
 @Component({
   selector: "app-categorys",
@@ -21,11 +20,7 @@ export class CategorysComponent implements OnInit {
   constructor(private store: Store<fromStore.ProductsState>) {}
 
   ngOnInit() {
-    /*
-    this.store.select<any>('products').subscribe(state => {
-      console.log(state);
-    });
-    */
+    this.store.dispatch(new fromStore.LoadCategories());
 
     this.categories$ = this.store.select<any>(fromStore.getAllCategories);
   }

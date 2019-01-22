@@ -4,9 +4,8 @@ import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
 import { CommonModule } from "@angular/common";
 
-import { StoreModule } from '@ngrx/store';
-import { reducers } from './store';
-
+import { StoreModule } from "@ngrx/store";
+import { reducers, effects } from "./store";
 
 // components
 import * as fromComponents from "./components";
@@ -16,6 +15,7 @@ import * as fromContainers from "./containers";
 
 // services
 import * as fromServices from "./services";
+import { EffectsModule } from "@ngrx/effects";
 
 export const ROUTES: Routes = [
   {
@@ -42,7 +42,8 @@ export const ROUTES: Routes = [
   imports: [
     CommonModule,
     RouterModule.forChild(ROUTES),
-    StoreModule.forFeature('products', reducers)
+    StoreModule.forFeature("products", reducers),
+    EffectsModule.forFeature(effects)
   ],
   providers: [...fromServices.services],
   declarations: [

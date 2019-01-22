@@ -1,5 +1,5 @@
-import { CategoryService } from './category.service';
+import { CategoryService } from "./category.service";
 
 export const services: any[] = [CategoryService];
 
-export * from './category.service';
+export * from "./category.service";
