@@ -1,7 +1,6 @@
 import {
   ActionReducerMap,
-  createFeatureSelector,
-  createSelector
+  createFeatureSelector
 } from "@ngrx/store";
 
 import * as fromCategories from "./categories.reduser";
@@ -18,6 +17,7 @@ export const getCategoriesState = createFeatureSelector<ProductsState>(
   "products"
 );
 
+/*
 export const getCategoryState = createSelector(
   getCategoriesState,
   (state: ProductsState) => state.categories
@@ -27,6 +27,7 @@ export const getCategoriesEntities = createSelector(
   getCategoryState,
   fromCategories.getCategoriesEntities
 );
+
 export const getAllCategories = createSelector(
   getCategoriesEntities,
   entities => {
@@ -38,7 +39,9 @@ export const getCategoriesLoaded = createSelector(
   getCategoryState,
   fromCategories.getCategoriesLoaded
 );
+
 export const getAllCategoriesLoading = createSelector(
   getCategoryState,
   fromCategories.getCategoriesLoading
 );
+*/

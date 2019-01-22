@@ -1,4 +1,9 @@
+import { Category } from "./../../models/catregory.model";
 import { Component, OnInit, Input } from "@angular/core";
+import { Observable } from "rxjs";
+import { Store } from "@ngrx/store";
+
+import * as fromStore from "../../store";
 
 @Component({
   selector: "app-category-item",
@@ -6,9 +11,11 @@ import { Component, OnInit, Input } from "@angular/core";
   styleUrls: ["./category-item.component.scss"]
 })
 export class CategoryItemComponent implements OnInit {
-  @Input() category: any;
+  category$: Observable<Category>;
 
-  constructor() {}
+  constructor(private store: Store<fromStore.ProductsState>) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.category$ = this.store.select(fromStore.getSelectedCategory);
+  }
 }
