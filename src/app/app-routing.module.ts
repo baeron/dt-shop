@@ -26,10 +26,18 @@ export const metaReducers: MetaReducer<any>[] = !environment.production
 
 // routes
 export const ROUTES: Routes = [
-  { path: "", pathMatch: "full", redirectTo: "products" },
+  {
+    path: "",
+    pathMatch: "full",
+    redirectTo: "products"
+  },
   {
     path: "products",
     loadChildren: "../products/products.module#ProductsModule"
+  },
+  {
+    path: "users",
+    loadChildren: "../users/users.module#UsersModule"
   }
 ];
 

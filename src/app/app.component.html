@@ -1,12 +1,15 @@
 <div class="app">
   <div class="app_header">
-    <h1>HEADER AND NAV</h1>
+    <div class="app__nav">
+      <a routerLink="products" routerLinkActive="active">Products</a>
+    </div>
+    <div class="app__nav">
+      <a routerLink="users" routerLinkActive="active">Users</a>
+    </div>
   </div>
   <div class="app__container">
     <h2>DATA from modules with routing</h2>
     <router-outlet></router-outlet>
   </div>
-  <div class="app__footer">
-    <h3>FOOTER</h3>
-  </div>
+  <div class="app__footer"><h3>FOOTER</h3></div>
 </div>

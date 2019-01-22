@@ -42,5 +42,17 @@
       "id": 12,
       "name": "first-second"
     }
+  ],
+  "users": [
+    {
+      "id": 111,
+      "email": "example@example.com",
+      "password": "example123"
+    },
+    {
+      "id": 222,
+      "email": "user@user.com",
+      "password": "user123"
+    }
   ]
 }

@@ -1,5 +1,3 @@
-import { ProductItemComponentComponent } from "./product-containers/product-item-component/product-item-component.component";
-import { ProductComponentComponent } from "./product-containers/product-component/product-component.component";
 import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
 import { CommonModule } from "@angular/common";
@@ -46,12 +44,7 @@ export const ROUTES: Routes = [
     EffectsModule.forFeature(effects)
   ],
   providers: [...fromServices.services],
-  declarations: [
-    ...fromContainers.containers,
-    ...fromComponents.components,
-    ProductComponentComponent,
-    ProductItemComponentComponent
-  ],
+  declarations: [...fromContainers.containers, ...fromComponents.components],
   exports: [
     ...fromContainers.containers,
     ...fromComponents.components,
