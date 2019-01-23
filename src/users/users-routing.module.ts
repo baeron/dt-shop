@@ -1,11 +1,15 @@
 import { NgModule } from "@angular/core";
+import { CommonModule } from "@angular/common";
 import { Routes, RouterModule } from "@angular/router";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 
 // STORE
 import { StoreModule } from "@ngrx/store";
-import { reducers } from "./srore";
 
 import * as fromContainers from "./containers";
+
+// services
+import * as fromServices from "./services";
 
 const USER_ROUTES: Routes = [
   {
@@ -23,14 +27,21 @@ const USER_ROUTES: Routes = [
   {
     path: "sign-up",
     component: fromContainers.SignUpComponent
+  },
+  {
+    path: "sign-up",
+    component: fromContainers.SignUpComponent
   }
 ];
 
 @NgModule({
   imports: [
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
     RouterModule.forChild(USER_ROUTES),
-    StoreModule.forFeature("users", reducers)
   ],
+  providers: [...fromServices.services],
   declarations: [...fromContainers.containers],
   exports: [...fromContainers.containers, RouterModule]
 })

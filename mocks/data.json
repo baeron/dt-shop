@@ -47,12 +47,20 @@
     {
       "id": 111,
       "email": "example@example.com",
-      "password": "example123"
+      "password": "example123",
+      "token": "firstToken"
     },
     {
       "id": 222,
       "email": "user@user.com",
-      "password": "user123"
+      "password": "user123",
+      "token": "secondToken"
+    },
+    {
+      "email": "ex@ex.com",
+      "password": "example",
+      "token": "F5J5V2OaN6J51unzlsNUUNm5SLFxP9ROZXsYHbpCdoUoa0I9yd3x02XuxmlMoYh1VzAM14wsFMpeE40Q2eSKGjxhHM2Fr4IioHCCYpgOwu5rOeWCurzrnuK3hrokbdi7je6HkMKD9LMYY8gahb2Np4",
+      "id": 223
     }
   ]
 }
