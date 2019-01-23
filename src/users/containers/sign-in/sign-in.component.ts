@@ -1,61 +1,41 @@
-import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, OnInit } from "@angular/core";
+import { Router, ActivatedRoute } from "@angular/router";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 
-import { UserService } from '../../services/user.service';
+import { UserService } from "../../services/user.service";
+import { AppState, selectAuthenticationState } from "../../srore/app.states";
+import { first } from "rxjs/operators";
+import { User } from "src/users/models/user.model";
+import { Observable } from "rxjs";
+import { Store } from "@ngrx/store";
 
-import { first } from 'rxjs/operators';
+import { Login } from "../../srore/actions/authentication.actions";
 
 @Component({
-  selector: 'app-sign-in',
-  templateUrl: './sign-in.component.html',
-  styleUrls: ['./sign-in.component.scss']
+  selector: "app-sign-in",
+  templateUrl: "./sign-in.component.html",
+  styleUrls: ["./sign-in.component.scss"]
 })
 export class SignInComponent implements OnInit {
+  user: User = new User();
+  getState: Observable<any>;
+  errorMessage: string = null;
 
-  loginForm: FormGroup;
-  loading = false;
-  submitted = false;
-  returnUrl: string;
-
-  constructor(
-    private formBuilder: FormBuilder,
-    private route: ActivatedRoute,
-    private router: Router,
-    private authenticationService: UserService
-  ) { }
-
-  ngOnInit() {
-    this.loginForm = this.formBuilder.group({
-      username: ['', Validators.required],
-      password: ['', Validators.required]
-    });
-
-    // get return url from route parameters or default to '/'
-    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+  constructor(private store: Store<AppState>) {
+    this.getState = this.store.select(selectAuthenticationState);
   }
 
-  // convenience getter for easy access to form fields
-  get f() { return this.loginForm.controls; }
+  ngOnInit() {
+    this.getState.subscribe(state => {
+      this.errorMessage = state.errorMessage;
+    });
+  }
 
-  onSubmit() {
-    this.submitted = true;
-    // stop here if form is invalid
-    if (this.loginForm.invalid) {
-        return;
-    }
-/*
-    this.loading = true;
-    this.authenticationService.login(this.f.username.value, this.f.password.value)
-      .pipe(first())
-      .subscribe(
-          data => {
-            this.router.navigate([this.returnUrl]);
-          },
-          error => {
-            this.alertService.error(error);
-            this.loading = false;
-        });
-          */
+  onSubmit(): void {
+    const actionPayload = {
+      email: this.user.email,
+      password: this.user.password
+    };
+    this.store.dispatch(new Login(actionPayload));
   }
 }

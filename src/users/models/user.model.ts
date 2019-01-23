@@ -1,7 +1,5 @@
-export interface User {
-  id?: number;
+export class User {
   email: string;
-  password: string;
+  password?: string;
   token: string;
-  [key: string]: any;
 }

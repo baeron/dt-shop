@@ -6,17 +6,8 @@
 
 import { MyAccountComponent } from "./my-account/my-account.component";
 import { SignInComponent } from "./sign-in/sign-in.component";
-import { SignOutComponent } from "./sign-out/sign-out.component";
-import { SignUpComponent } from "./sign-up/sign-up.component";
 
-export const containers: any[] = [
-  MyAccountComponent,
-  SignInComponent,
-  SignOutComponent,
-  SignUpComponent
-];
+export const containers: any[] = [MyAccountComponent, SignInComponent];
 
 export * from "./my-account/my-account.component";
 export * from "./sign-in/sign-in.component";
-export * from "./sign-out/sign-out.component";
-export * from "./sign-up/sign-up.component";
